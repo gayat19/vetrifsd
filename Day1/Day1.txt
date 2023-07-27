@@ -1,0 +1,14 @@
+C - Create - POST - > Sending Data
+R - Read - GET - > Retriving Data
+U - Update - PUT  -> Edit Data
+D - Delete - DELETE - > Deleting Data
+
+
+HTTP Methods -> GET,PUT,POST,DELETE,FETCH,PATCH
+
+
+SOA - > Service Oriencted Architecture
+   Methods
+RESTful Service
+  Resource
+Web API ->
