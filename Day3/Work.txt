@@ -1,0 +1,8 @@
+handling Multiple occurance of same verb 
+
+
+Data base connectivity
+ EF
+   Code First
+   Database first Approch
+ADO.NET

@@ -28,8 +28,10 @@ namespace TourAPI.Services
         public IEnumerable<Tour> GetTourWithinRange(float min, float max)
         {
             var tours = _GetTours();
-            var myTours = tours?.Where(t => t.Price >= min && t.Price <= max);
-            return myTours;
+            var myTours = tours.Where(t => t.Price >= min && t.Price <= max).ToList();
+            if(myTours?.Count()>0)
+                return myTours;
+            return null;
         }
 
         public Tour AddNewTour(Tour tour)

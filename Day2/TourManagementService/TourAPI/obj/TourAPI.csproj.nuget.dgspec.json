@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Data\\d drive\\Corp\\G3\\Vetrivel\\TourManagementService\\TourAPI\\TourAPI.csproj": {}
+    "D:\\Data\\d drive\\Corp\\G3\\Vetrivel\\Day2\\TourManagementService\\TourAPI\\TourAPI.csproj": {}
   },
   "projects": {
-    "D:\\Data\\d drive\\Corp\\G3\\Vetrivel\\TourManagementService\\TourAPI\\TourAPI.csproj": {
+    "D:\\Data\\d drive\\Corp\\G3\\Vetrivel\\Day2\\TourManagementService\\TourAPI\\TourAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Data\\d drive\\Corp\\G3\\Vetrivel\\TourManagementService\\TourAPI\\TourAPI.csproj",
+        "projectUniqueName": "D:\\Data\\d drive\\Corp\\G3\\Vetrivel\\Day2\\TourManagementService\\TourAPI\\TourAPI.csproj",
         "projectName": "TourAPI",
-        "projectPath": "D:\\Data\\d drive\\Corp\\G3\\Vetrivel\\TourManagementService\\TourAPI\\TourAPI.csproj",
+        "projectPath": "D:\\Data\\d drive\\Corp\\G3\\Vetrivel\\Day2\\TourManagementService\\TourAPI\\TourAPI.csproj",
         "packagesPath": "C:\\Users\\gayat\\.nuget\\packages\\",
-        "outputPath": "D:\\Data\\d drive\\Corp\\G3\\Vetrivel\\TourManagementService\\TourAPI\\obj\\",
+        "outputPath": "D:\\Data\\d drive\\Corp\\G3\\Vetrivel\\Day2\\TourManagementService\\TourAPI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -44,6 +44,16 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.20, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.20, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"

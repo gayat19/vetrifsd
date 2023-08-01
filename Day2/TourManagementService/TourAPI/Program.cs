@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using TourAPI.Contexts;
 using TourAPI.Interfaces;
 using TourAPI.Models;
 using TourAPI.Repos;
@@ -20,8 +22,12 @@ namespace TourAPI
             #endregion
 
             #region UserDefinedServicesInjection
-            builder.Services.AddScoped<IRepo<int, Tour>, TourRepo>();
+            builder.Services.AddScoped<IRepo<int, Tour>, TourDbRepo>();
             builder.Services.AddScoped<ITourService,TourService>();
+            builder.Services.AddDbContext<TravelContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("travelCon"));
+            });
             #endregion
             var app = builder.Build();
 

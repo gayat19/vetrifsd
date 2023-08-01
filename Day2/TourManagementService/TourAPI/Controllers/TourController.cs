@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TourAPI.Interfaces;
 using TourAPI.Models;
+using TourAPI.Models.DTOs;
 
 namespace TourAPI.Controllers
 {
@@ -27,6 +28,22 @@ namespace TourAPI.Controllers
                 return NotFound("No tour with that name");
             }
             return Ok(data);
+        }
+
+        /// <summary>
+        /// Gets tours within the given min and max value
+        /// </summary>
+        /// <param name="min">int that represents minimum price</param>
+        /// <param name="max">int that represents maximum price</param>
+        /// <returns></returns>
+        [ProducesResponseType(typeof(IEnumerable<Tour>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpGet("GetToursInRange")]
+        public ActionResult<IEnumerable<Tour>> GetTours(int min, int max)
+        {
+            var data = _tourService.GetTourWithinRange(min, max);
+            
+            return data!=null?Ok(data):NotFound("No tour with that name");
         }
 
         [ProducesResponseType(typeof(Tour), StatusCodes.Status201Created)]
