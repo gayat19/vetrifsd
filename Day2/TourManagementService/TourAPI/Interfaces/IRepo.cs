@@ -4,11 +4,11 @@ namespace TourAPI.Interfaces
 {
     public interface IRepo<K,T>
     {
-        IEnumerable<T> GetAll();
-        T Get(int key);
-        T Add(Tour item);
-        T Update(Tour item);
-        T Delete(int key);
+        Task<IEnumerable<T>> GetAll();
+        Task<T> Get(int key);
+        Task<T> Add(T item);
+        Task<T> Update(T item);
+        Task<T> Delete(int key);
 
     }
 }

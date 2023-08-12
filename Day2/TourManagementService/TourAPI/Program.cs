@@ -23,7 +23,8 @@ namespace TourAPI
 
             #region UserDefinedServicesInjection
             builder.Services.AddScoped<IRepo<int, Tour>, TourDbRepo>();
-            builder.Services.AddScoped<ITourService,TourService>();
+            builder.Services.AddScoped<ICustomerTourService,TourService>();
+            builder.Services.AddScoped<IAgentTourService, TourService>();
             builder.Services.AddDbContext<TravelContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("travelCon"));

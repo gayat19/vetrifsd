@@ -8,11 +8,11 @@ namespace TourAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TourController : ControllerBase
+    public class CustomerTourController : ControllerBase
     {
-        private ITourService _tourService;
+        private ICustomerTourService _tourService;
 
-        public TourController(ITourService tourService)
+        public CustomerTourController(ICustomerTourService tourService)
         {
             _tourService = tourService;
         }
@@ -20,9 +20,9 @@ namespace TourAPI.Controllers
         [ProducesResponseType(typeof(IEnumerable<Tour>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet]
-        public ActionResult<IEnumerable<Tour>> Get(string name)
+        public async Task<ActionResult<IEnumerable<Tour>>> Get(string name)
         {
-            var data = _tourService.GetTourByName(name);
+            var data = await _tourService.GetTourByName(name);
             if(data == null)
             {
                 return NotFound("No tour with that name");
@@ -39,24 +39,12 @@ namespace TourAPI.Controllers
         [ProducesResponseType(typeof(IEnumerable<Tour>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet("GetToursInRange")]
-        public ActionResult<IEnumerable<Tour>> GetTours(int min, int max)
+        public async Task<ActionResult<IEnumerable<Tour>>> GetTours(int min, int max)
         {
-            var data = _tourService.GetTourWithinRange(min, max);
+            var data = await _tourService.GetTourWithinRange(min, max);
             
             return data!=null?Ok(data):NotFound("No tour with that name");
         }
-
-        [ProducesResponseType(typeof(Tour), StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [HttpPost]
-        public ActionResult<Tour> AddTour(Tour tour)
-        {
-            var result = _tourService.AddNewTour(tour);
-            if(result == null)
-            {
-                return BadRequest("Unable to add tour at this moment");
-            }
-            return Created("", tour);
-        }
+       
     }
 }

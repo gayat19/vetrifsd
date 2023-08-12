@@ -1,11 +1,13 @@
 ﻿using System.Xml.Linq;
 using TourAPI.Interfaces;
 using TourAPI.Models;
+using TourAPI.Models.DTOs;
 using TourAPI.Repos;
+
 
 namespace TourAPI.Services
 {
-    public class TourService :ITourService
+    public class TourService :ICustomerTourService,IAgentTourService
     {
         private readonly IRepo<int, Tour> _tourRepo = new TourRepo();
 
@@ -14,45 +16,45 @@ namespace TourAPI.Services
             _tourRepo = tourRepo;
         }
 
-        private List<Tour> _GetTours()
+        private async Task<List<Tour>> _GetTours()
         {
-           return _tourRepo.GetAll().ToList();
+           return (await _tourRepo.GetAll()).ToList();
         }
-        public Tour GetTourByName(string name)
+        public async Task<Tour> GetTourByName(string name)
         {
-            var tours = _GetTours();
+            var tours = await _GetTours();
             var tour = tours?.FirstOrDefault(t => t.Name == name);
             return tour;
         }
 
-        public IEnumerable<Tour> GetTourWithinRange(float min, float max)
+        public async Task<IEnumerable<Tour>> GetTourWithinRange(float min, float max)
         {
-            var tours = _GetTours();
+            var tours = await _GetTours();
             var myTours = tours.Where(t => t.Price >= min && t.Price <= max).ToList();
             if(myTours?.Count()>0)
                 return myTours;
             return null;
         }
 
-        public Tour AddNewTour(Tour tour)
+        public async Task<Tour> AddNewTour(Tour tour)
         {
-            var mytour = _tourRepo.Get(tour.Id);
+            var mytour = await _tourRepo.Get(tour.Id);
             if(mytour == null)
             {
-                _tourRepo.Add(tour);
+                await _tourRepo.Add(tour);
                 return tour;
             }
             return null;
         }
 
-        public Tour UpdatePrice(int id, float price)
+        public async Task<Tour> UpdatePrice(TourPriceUpdateDTO tour)
         {
-            var tour = _tourRepo.Get(id);
+            Tour mytour = await _tourRepo.Get(tour.Id);
             if (tour != null)
             {
-                tour.Price = price;
-                _tourRepo.Update(tour);
-                return tour;
+                mytour.Price = tour.Price;
+                await _tourRepo.Update(mytour);
+                return mytour;
             }
             return null;
         }

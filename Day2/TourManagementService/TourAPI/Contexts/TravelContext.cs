@@ -11,6 +11,8 @@ namespace TourAPI.Contexts
         }
 
         public DbSet<Tour> Tours { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Tour>().HasData(new Tour { Id = 101, Name = "Japan", Price = 150000.4f },

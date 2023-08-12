@@ -9,15 +9,15 @@ namespace TourAPI.Repos
         static List<Tour> tours = new List<Tour>() { new Tour {Id=101,Name="Euroupe Ext",Price=150000.4f } ,
         new Tour {Id=102,Name="USA",Price=200000.0f}};
 
-        public Tour Add(Tour item)
+        public async Task<Tour> Add(Tour item)
         {
            tours.Add(item);
             return item;
         }
 
-        public Tour Delete(int key)
+        public async Task<Tour> Delete(int key)
         {
-            var tour = Get(key);
+            var tour = await Get(key);
             if(tour != null)
             {
                 tours.Remove(tour);
@@ -26,22 +26,22 @@ namespace TourAPI.Repos
             return null;
         }
 
-        public Tour Get(int key)
+        public async Task<Tour>  Get(int key)
         {
             var tour = tours.FirstOrDefault(tour => tour.Id == key);
             return tour;
         }
 
-        public IEnumerable<Tour> GetAll()
+        public async Task<IEnumerable<Tour>> GetAll()
         {
            if(tours.Count>0)
                 return tours;
             return null;
         }
 
-        public Tour Update(Tour item)
+        public async Task<Tour> Update(Tour item)
         {
-            var tour = Get(item.Id);
+            var tour = await Get(item.Id);
             if (tour != null)
             {
                 tour.Name = item.Name;
